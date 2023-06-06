@@ -3,8 +3,9 @@ import 'package:api_integration_02/model/user_name.dart';
 import 'package:flutter/material.dart';
 
 import 'user_location.dart';
+import 'user_picture.dart';
 
-class User{
+class User {
   final String gender;
   final String email;
   final String phone;
@@ -13,7 +14,7 @@ class User{
   final UserName name;
   final UserDob dob;
   final UserLocation location;
-
+  final UserPicture picture;
 
   User({
     required this.gender,
@@ -22,12 +23,34 @@ class User{
     required this.cell,
     required this.nat,
     required this.name,
-     required this.dob,
-     required this.location,
+    required this.dob,
+    required this.location,
+    required this.picture,
   });
 
-  String get fullname{
+  factory User.fromMap(Map<String, dynamic> e) {
+    final name = UserName.fromMap(e['name']);
+
+    final dob = UserDob.fromMap(e['dob']);
+
+    final location = UserLocation.fromMap(e['location']);
+
+    final picture = UserPicture.fromMap(e['picture']);
+
+    return User(
+      gender: e['gender'],
+      email: e['emai'],
+      phone: e['phone'],
+      cell: e['cell'],
+      nat: e['nat'],
+      name: name,
+      dob: dob,
+      location: location,
+      picture: picture,
+    );
+  }
+
+  String get fullname {
     return '${name.title}' '${name.first}' '${name.last}';
   }
 }
-
